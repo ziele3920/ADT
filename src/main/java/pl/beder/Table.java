@@ -10,6 +10,8 @@ public interface Table {
 
     int firstIndexWithGivenOrHigherValue(long value);
 
+    void insert(long value);
+
     void insertAt(int index, long value);
 
     void insertSorted(long value);

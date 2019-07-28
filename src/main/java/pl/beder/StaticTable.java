@@ -1,10 +1,23 @@
 package pl.beder;
 
+import java.util.Arrays;
+
 public class StaticTable implements Table {
+
+    private final long[] holder;
+    private int size = 0;
+
+    public StaticTable() {
+        holder = new long[1_000_000];
+    }
+
+    public StaticTable(int size) {
+        this.holder = new long[size];
+    }
 
     @Override
     public long size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -14,28 +27,58 @@ public class StaticTable implements Table {
 
     @Override
     public int firstIndexWith(long value) {
-        return 0;
+        for (int i = 0; i < size; i++) {
+            if (value == holder[i]) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int firstIndexWithGivenOrHigherValue(long value) {
-        return 0;
+        int index = firstIndexWith(value);
+
+        if (index == -1) {
+            for (int i = 0; i < size; i++) {
+                if (value < holder[i]) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    @Override            //   0             2           size= 1
+    public void insertAt(int index, long value) {
+        for (int i = size; i > index; i--) {
+            holder[i] = holder[i - 1];
+        }
+        holder[index] = value;
+        size++;
     }
 
     @Override
-    public void insertAt(int index, long value) {
-
+    public void insert(long value) {
+        holder[size] = value;
+        size++;
     }
 
     @Override
     public void insertSorted(long value) {
-
+        int index = firstIndexWithGivenOrHigherValue(value);
+        if (index == -1) {
+            insert(value);
+        } else {
+            insertAt(index, value);
+        }
     }
 
     @Override
     //TODO - This should return copy of the filled part of the array
     public long[] getHolderView() {
-        return new long[0];
+        return Arrays.copyOfRange(holder, 0, size);
+
     }
 
 }

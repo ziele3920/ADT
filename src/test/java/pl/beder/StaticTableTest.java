@@ -101,7 +101,7 @@ public class StaticTableTest {
     }
 
     @Test
-    public void shouldReturnIndexSameAsSizeWhenThereIsNoHigherValuePresent() {
+    public void shouldReturnMinusOneThereIsNoHigherValuePresent() {
         //given
         initializeHolderWith_3_4_5_2_1();
 
@@ -109,7 +109,7 @@ public class StaticTableTest {
         long index = staticTable.firstIndexWithGivenOrHigherValue(6);
 
         //then
-        assertThat(index).isEqualTo(5L);
+        assertThat(index).isEqualTo(-1L);
     }
 
     @Test
