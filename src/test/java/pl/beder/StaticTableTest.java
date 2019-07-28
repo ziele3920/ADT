@@ -9,6 +9,25 @@ public class StaticTableTest {
     private final StaticTable staticTable = new StaticTable();
 
     @Test
+    public void emptyTableShouldHaveSize_0() {
+        //when
+        long size = staticTable.size();
+
+        //then
+        assertThat(size).isEqualTo(0);
+    }
+
+    @Test
+    public void tableWithOneElementShouldHaveSize1() {
+        //when
+       staticTable.insertAt(0, 5);
+        long size = staticTable.size();
+
+        //then
+        assertThat(size).isEqualTo(1);
+    }
+
+    @Test
     public void shouldInsertValuesCorrectly() {
         //when
         staticTable.insertAt(0, 1);
