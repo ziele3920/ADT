@@ -51,9 +51,8 @@ public class LinkedList implements Table {
 
     @Override
     public void insert(long value) {
-        if (first == null) {
-            first = new Node(value);
-            last = first;
+        if (size == 0) {
+            last = first = new Node(value);
         } else {
             Node next = new Node(value);
             last.setNext(next);
@@ -66,45 +65,45 @@ public class LinkedList implements Table {
     @Override
     public void insertAt(int index, long value) {
         checkInsertBounds(index);
-        
-        Node tmpPrev = first;
+        if (size == 0 || index == size) {
+            insert(value);
+            return;
+        }
 
+        Node tmpPrev = first;
         for (int i = 0; i < index; i++) {
             tmpPrev = tmpPrev.getNext();
         }
 
-        if (tmpPrev == null) {
-            insertFirstNode(value);
-        } else if (tmpPrev.getNext() == null) {
-            insertLastNode(tmpPrev, value);
+        insertBetween(tmpPrev, value);
+    }
+
+    private void insertBetween(Node replaced, long value) {
+        Node newNode = new Node(value);
+
+        Node beforeReplaced = replaced.getPrev();
+        //No node before replaced this means that replaced was first node!
+        //Now 'first' must point to the newNode we inserted
+        if (beforeReplaced == null) {
+            first = newNode;
         } else {
-            insertBetween(tmpPrev, tmpPrev.getNext(), value);
+            beforeReplaced.setNext(newNode);
+            newNode.setPrev(beforeReplaced);
         }
-    }
+        newNode.setNext(replaced);
+        replaced.setPrev(newNode);
 
-    private void insertFirstNode(long value) {
-        Node newNode = new Node(value);
-        first = last = newNode;
-    }
-
-    private void insertLastNode(Node previous, long value) {
-        Node newNode = new Node(value);
-        previous.setNext(newNode);
-        newNode.setPrev(previous);
-    }
-
-    private void insertBetween(Node previous, Node next, long value) {
-        Node newNode = new Node(value);
-        previous.setNext(newNode);
-        newNode.setPrev(previous);
-
-        newNode.setNext(next);
-        next.setPrev(newNode);
+        size++;
     }
 
     @Override
     public void insertSorted(long value) {
-
+        int index = firstIndexWithGivenOrHigherValue(value);
+        if (index == -1) {
+            insert(value);
+        } else {
+            insertAt(index, value);
+        }
     }
 
     @Override
