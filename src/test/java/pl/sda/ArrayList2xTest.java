@@ -1,6 +1,8 @@
-package pl.beder;
+package pl.sda;
 
 import org.junit.Test;
+import pl.sda.List.ArrayList2x;
+import pl.sda.List.IList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

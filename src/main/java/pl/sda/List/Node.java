@@ -1,4 +1,4 @@
-package pl.beder;
+package pl.sda.List;
 
 public class Node {
     private long value;

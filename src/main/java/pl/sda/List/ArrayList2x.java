@@ -1,4 +1,4 @@
-package pl.beder;
+package pl.sda.List;
 
 import java.util.Arrays;
 

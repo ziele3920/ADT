@@ -1,4 +1,4 @@
-package pl.beder;
+package pl.sda.List;
 
 public class LinkedList implements IList {
     Node first;
