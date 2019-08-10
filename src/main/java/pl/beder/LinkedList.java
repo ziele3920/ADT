@@ -1,12 +1,18 @@
 package pl.beder;
 
-public class LinkedList implements Table {
+public class LinkedList implements IList {
     Node first;
     Node last;
     int size = 0;
 
+    //to do
     @Override
-    public long size() {
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public int size() {
         return size;
     }
 
@@ -19,6 +25,18 @@ public class LinkedList implements Table {
             tmp = tmp.getNext();
         }
         return tmp.getValue();
+    }
+
+    //to do
+    @Override
+    public void set(int index, long value) {
+
+    }
+
+    //to do
+    @Override
+    public void remove(int index) {
+
     }
 
     @Override
@@ -36,21 +54,7 @@ public class LinkedList implements Table {
     }
 
     @Override
-    public int firstIndexWithGivenOrHigherValue(long value) {
-        int index = 0;
-        Node tmp = first;
-        while (tmp != null) {
-            if (tmp.getValue() >= value) {
-                return index;
-            }
-            index++;
-            tmp = tmp.getNext();
-        }
-        return -1;
-    }
-
-    @Override
-    public void insert(long value) {
+    public void add(long value) {
         if (size == 0) {
             last = first = new Node(value);
         } else {
@@ -63,10 +67,10 @@ public class LinkedList implements Table {
     }
 
     @Override
-    public void insertAt(int index, long value) {
+    public void add(int index, long value) {
         checkInsertBounds(index);
         if (size == 0 || index == size) {
-            insert(value);
+            add(value);
             return;
         }
 
@@ -97,16 +101,6 @@ public class LinkedList implements Table {
     }
 
     @Override
-    public void insertSorted(long value) {
-        int index = firstIndexWithGivenOrHigherValue(value);
-        if (index == -1) {
-            insert(value);
-        } else {
-            insertAt(index, value);
-        }
-    }
-
-    @Override
     public long[] getHolderView() {
         long[] longs = new long[size];
         int index = 0;
@@ -125,7 +119,7 @@ public class LinkedList implements Table {
         }
     }
 
-    //when inserting value you can insert it between other or exactly at the end which is index = size
+    //when inserting value you can add it between other or exactly at the end which is index = size
     private void checkInsertBounds(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(index);

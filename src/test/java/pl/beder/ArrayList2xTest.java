@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LinkedListTest {
+public class ArrayList2xTest {
 
-    private final IList list = new LinkedList();
+    private final IList list = new ArrayList2x();
 
     @Test
     public void emptyTableShouldHaveSize_0() {
@@ -20,7 +20,7 @@ public class LinkedListTest {
     @Test
     public void tableWithOneElementShouldHaveSize1() {
         //when
-        list.add(0, 5);
+       list.add(0, 5);
         long size = list.size();
 
         //then
