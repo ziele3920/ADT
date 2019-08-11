@@ -1,19 +1,19 @@
 package pl.sda.List;
 
-public class Node {
-    private long value;
+public class Node<T> {
+    private T value;
     private Node next;
     private Node prev;
 
-    public Node(long value) {
+    public Node(T value) {
         this.value = value;
     }
 
-    public long getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(long value) {
+    public void setValue(T value) {
         this.value = value;
     }
 

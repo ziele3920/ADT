@@ -3,16 +3,14 @@ package pl.sda.List;
 public class MainList {
 
     public static void main(String[] args) {
-        IList list = new LinkedList();
-        list.add(1);
-        list.add(2);
-        list.add(3);
+        IList<Long> list = new LinkedList<Long>();
+        list.add(1L);
+        list.add(2L);
+        list.add(3L);
 
-        long[] tab = list.getHolderView();
-        list.remove(2);
-        System.out.println(list.get(2));
+        Object[] tab = list.getHolderView();
 
-        for (long val:tab)
-            System.out.print(val + " ");
+        for (int i = 0; i < tab.length; ++i)
+            System.out.print(tab[i] + " ");
     }
 }

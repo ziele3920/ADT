@@ -1,8 +1,8 @@
 package pl.sda.List;
 
-public class LinkedList implements IList {
-    Node first;
-    Node last;
+public class LinkedList<T> implements IList<T> {
+    Node<T> first;
+    Node<T> last;
     int size = 0;
 
     //to do
@@ -17,7 +17,7 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public long get(int index) {
+    public T get(int index) {
         checkBounds(index);
 
         if(index == size-1)
@@ -25,7 +25,7 @@ public class LinkedList implements IList {
         if(index == 0)
             return first.getValue();
 
-        Node tmp = first;
+        Node<T> tmp = first;
         for (int i = 0; i < index; i++) {
             tmp = tmp.getNext();
         }
@@ -33,7 +33,7 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public void set(int index, long value) {
+    public void set(int index, T value) {
         checkBounds(index);
 
         Node tmp = first;
@@ -71,7 +71,7 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public int firstIndexWith(long value) {
+    public int firstIndexWith(T value) {
         int index = 0;
         Node tmp = first;
         while (tmp != null) {
@@ -85,7 +85,7 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public void add(long value) {
+    public void add(T value) {
         if (size == 0) {
             last = first = new Node(value);
         } else {
@@ -98,7 +98,7 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public void add(int index, long value) {
+    public void add(int index, T value) {
         checkInsertBounds(index);
         if (size == 0 || index == size) {
             add(value);
@@ -113,7 +113,7 @@ public class LinkedList implements IList {
         insertBetween(tmpPrev, value);
     }
 
-    private void insertBetween(Node replaced, long value) {
+    private void insertBetween(Node replaced, T value) {
         Node newNode = new Node(value);
 
         Node beforeReplaced = replaced.getPrev();
@@ -132,10 +132,10 @@ public class LinkedList implements IList {
     }
 
     @Override
-    public long[] getHolderView() {
-        long[] longs = new long[size];
+    public T[] getHolderView() {
+        T[] longs = (T[]) new Object[size];
         int index = 0;
-        Node tmp = first;
+        Node<T> tmp = first;
         while (tmp != null) {
             longs[index++] = tmp.getValue();
             tmp = tmp.getNext();
