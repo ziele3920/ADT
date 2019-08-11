@@ -25,18 +25,21 @@ public class ArrayList2x implements IList {
 
     @Override
     public long get(int index) {
+        checkBounds(index);
         return holder[index];
     }
 
     //to do
     @Override
     public void set(int index, long value) {
+        checkBounds(index);
         holder[index] = value;
     }
 
     //to do
     @Override
     public void remove(int index) {
+        checkBounds(index);
         for(int i = index; i < size-1; ++i)
             holder[i] = holder[i+1];
         size--;
@@ -85,6 +88,13 @@ public class ArrayList2x implements IList {
     public long[] getHolderView() {
         return Arrays.copyOfRange(holder, 0, size);
 
+    }
+
+    //When retrieving value last element is at index size -1
+    private void checkBounds(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(index);
+        }
     }
 
 }

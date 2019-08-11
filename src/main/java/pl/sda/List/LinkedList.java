@@ -20,6 +20,11 @@ public class LinkedList implements IList {
     public long get(int index) {
         checkBounds(index);
 
+        if(index == size-1)
+            return last.getValue();
+        if(index == 0)
+            return first.getValue();
+
         Node tmp = first;
         for (int i = 0; i < index; i++) {
             tmp = tmp.getNext();
@@ -42,14 +47,15 @@ public class LinkedList implements IList {
     public void remove(int index) {
         checkBounds(index);
 
-        size--;
         if(index == 0) {
             first = first.getNext();
+            size--;
             return;
         }
 
         if(index==size-1) {
             last = last.getPrev();
+            size--;
             return;
         }
 
@@ -61,6 +67,7 @@ public class LinkedList implements IList {
         Node next = tmp.getNext();
         prev.setNext(next);
         next.setPrev(prev);
+        size--;
     }
 
     @Override

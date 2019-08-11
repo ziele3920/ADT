@@ -152,6 +152,67 @@ public class LinkedListTest {
         assertThat(list.firstIndexWith(5)).isEqualTo(-1);
     }
 
+    @Test
+    public void lastElementShouldGetValuePropoerly() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+
+        //then
+        assertThat(list.get(4)).isEqualTo(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldThrowExceptionWhenRemoveLastAndGetRemovedIndex() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+        list.remove(4);
+
+        list.get(4);
+    }
+
+    @Test
+    public void lastElementShouldGetValuePropoerlyAfterRemoveEarlierLast() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+
+        list.remove(4);
+
+        assertThat(list.get(3)).isEqualTo(2);
+    }
+
+    @Test
+    public void firstElementShouldGetValuePropoerly() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+
+        //then
+        assertThat(list.get(0)).isEqualTo(3);
+    }
+
+    @Test
+    public void firstElementShouldGetValuePropoerlyAfterRemoveEarlierFirst() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+
+        list.remove(0);
+
+        assertThat(list.get(0)).isEqualTo(4);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldThrowExceptionWhenSetOutOfBoundIndex() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+        list.set(5, 2);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldThrowExceptionWhenGetOutOfBoundIndex() {
+        //given
+        initializeHolderWith_3_4_5_2_1();
+        list.get(5);
+    }
+
     private void initializeHolderWith_3_4_5_2_1() {
         list.add(0, 1);
         list.add(0, 2);

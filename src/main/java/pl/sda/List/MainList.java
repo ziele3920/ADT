@@ -9,6 +9,8 @@ public class MainList {
         list.add(3);
 
         long[] tab = list.getHolderView();
+        list.remove(2);
+        System.out.println(list.get(2));
 
         for (long val:tab)
             System.out.print(val + " ");
