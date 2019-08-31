@@ -1,22 +1,14 @@
 package pl.sda.List;
 
-public interface IList {
+public interface IList<T> {
 
     boolean isEmpty();
-
     int size();
-
-    void add(long value);
-
-    void add(int index, long value);
-
-    long get(int index);
-
-    void set(int index, long value);
-
+    void add(T value);
+    void add(int index, T value);
+    T get(int index);
+    void set(int index, T value);
     void remove(int index);
-
-    int firstIndexWith(long value);
-
-    long[] getHolderView();
+    int firstIndexWith(T value);
+    T[] getHolderView();
 }
