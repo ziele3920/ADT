@@ -8,6 +8,7 @@ public class TreeMain {
         tree.add(2);
         tree.add(5);
         tree.add(9);
+        tree.remove(2);
         System.out.println(tree.search(2));
         System.out.println(tree.search(11));
     }

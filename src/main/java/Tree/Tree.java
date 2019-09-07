@@ -18,9 +18,30 @@ public class Tree {
         TreeNode nodeToDelete = findNodeByValue(root, value);
         if(nodeToDelete == null) return;
 
-        List children = new ArrayList();
+        TreeNode parentNode = findParent(nodeToDelete, root);
+
+        List<TreeNode> children = new ArrayList();
         getChildren(nodeToDelete, children);
-        nodeToDelete = null;
+        if(parentNode.getRight() != null && nodeToDelete.getValue() == parentNode.getRight().getValue())
+            parentNode.setRight(null);
+        else if(parentNode.getLeft() != null)
+            parentNode.setLeft(null);
+        for (TreeNode node:children)
+            this.add(node.getValue());
+    }
+
+    private TreeNode findParent(TreeNode childNode, TreeNode tmpNode) {
+        if(tmpNode == null)
+            return null;
+        if(tmpNode.getLeft() != null && childNode.getValue() == tmpNode.getLeft().getValue())
+            return tmpNode;
+        if(tmpNode.getRight() != null && childNode.getValue() == tmpNode.getRight().getValue())
+            return tmpNode;
+        if(childNode.getValue() < tmpNode.getValue())
+            return findParent(childNode, tmpNode.getLeft());
+        if(childNode.getValue() > tmpNode.getValue())
+            return findParent(childNode, tmpNode.getRight());
+        return null;
     }
 
     private void getChildren(TreeNode parentNode, List children) {
